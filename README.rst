@@ -1,4 +1,4 @@
-randomaya
+randomaya: Generates Random Aya from the Holy Quran
 --------
 
 Developed in Python 2.7.11
