@@ -6,7 +6,7 @@ def readme():
 
 
 setup(name='randomaya',
-      version='0.1.2',
+      version='0.1.3',
       description='Random aya generator',
       long_description = "Generates random aya from the Holy Quran",
       classifiers=[
