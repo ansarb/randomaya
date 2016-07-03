@@ -6,7 +6,7 @@ def readme():
 
 
 setup(name='randomaya',
-      version='0.1.1',
+      version='0.1.2',
       description='Random aya generator',
       url='https://github.com/ansarb/randomaya',
       author='Ansar Bedharudeen',
