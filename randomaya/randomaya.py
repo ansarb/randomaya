@@ -1,11 +1,12 @@
 import xml.etree.ElementTree as ET, random
-import urllib2
-
+import requests, os
+from tqdm import tqdm
 #   This package is created by Ansar Bedharudeen and its created with the best of my knowledge.
 #   Should you find any errors please report it to 1ns1rb@gmail.com
 #   All quran text and translations are obtained from Tanzil.net
 #   You may search for new translations or any updates  at http://tanzil.net
 #   Any new translations or updated data should be copied to 'data' folder
+
 
 def getRandomAya(lang = 'en.sahih'):
     root = ET.parse('./data/'+lang+'.xml').getroot()
@@ -14,6 +15,7 @@ def getRandomAya(lang = 'en.sahih'):
     rand_aya =random.randint(1,len(root.findall(p)))
     path = "sura[@index='{}']/aya[@index='{}']".format(str(rand_sura), str(rand_aya))
     return root.find(path).get('text') + " - Surah:{} Aya:{}".format(rand_sura, rand_aya)
+
 
 def getMultiRandomAya(lang = ['en.sahih']):
     result ={}
@@ -33,14 +35,29 @@ def getMultiRandomAya(lang = ['en.sahih']):
         result[l+ 'name'] = root.find(name).get('name')
     return result
 
-def getTranslation(name):
+
+def getTranslation(name=""):
+    _ROOT = os.path.abspath(os.path.dirname(__file__))
+    filename = os.path.join(_ROOT, 'data', name +".xml")
+    if name:
+        print ("Downloading translation ("+name+")..... ")
+        url = "http://tanzil.net/trans/?transID={}&type=xml".format(name)
+        response = requests.get(url, stream=True)
+        try:
+            with open(filename, "wb") as handle:
+                for data in tqdm(response.iter_content()):
+                    handle.write(data)
+                if (handle.tell() < 150):
+                    print "Entered Translate Tag is possibly wrong. Check entered Translate Tag, refer README for details"
+                    exit()
+            handle.close()
+        finally:
+
+            print "Process Completed."
+    else:
+        print ("Oops! You forgot to mention translate tag, refer README for details")
 
 
-    url = "http://tanzil.net/trans/?transID={}&type=xml".format(name)
-    s = urllib2.urlopen(url)
-    contents = s.read()
-    file = open("./data/"+name +".xml", 'w')
-    file.write(contents)
-    file.close()
 
-getTranslation('bn.hoque')
+
+

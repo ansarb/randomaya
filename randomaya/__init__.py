@@ -1,1 +1,1 @@
-from .generator import getRandomAya, getMultiRandomAya
+from .randomaya import getRandomAya, getMultiRandomAya, getTranslation

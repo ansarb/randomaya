@@ -21,9 +21,7 @@ Manual Method:
 
 Direct Download Method:
 1. Get the tag name (eg: en.sahih) for preferred language in "Translation Lookup" file
-2. Open shell and run randomaya.translate("en.sahih")
+2. Open shell and run randomaya <tag name>
 3. Thats It!
 
-Upcoming Updates:
-1. Translation installation function
-2. Command line utilities
+

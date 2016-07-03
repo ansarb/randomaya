@@ -14,5 +14,7 @@ setup(name='randomaya',
       license='MIT',
       packages=['randomaya'],
       include_package_data=True,
-      scripts=['bin/randomaya'],
+      entry_points = {
+        'console_scripts': ['randomaya=randomaya.command_line:main'],
+    },
       zip_safe=False)
