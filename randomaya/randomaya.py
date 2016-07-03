@@ -61,9 +61,8 @@ def getTranslation(name=""):
     else:
         print ("Oops! You forgot to mention translate tag, refer README for details")
 
-print getMultiRandomAya()
-print getRandomAya()
-getTranslation("en.sahih")
+
+
 
 
 

@@ -3,7 +3,11 @@ import sys
 import randomaya
 
 def main():
-    print "entering command center"
-    arg = sys.argv[1]
-    print arg
-    randomaya.getTranslation(arg)
+    try:
+        arg = sys.argv[1]
+        randomaya.getTranslation(arg)
+
+    except:
+        print("<<>> Check your command, is it in the following format: \n randomaya <tag name>")
+
+
