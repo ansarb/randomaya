@@ -1,4 +1,4 @@
-randomaya
+randomaya: Generates Random Aya from the Holy Quran
 --------
 
 **Randomaya generates aya from the Holy Quran randomly**
