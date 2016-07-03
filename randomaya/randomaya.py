@@ -9,7 +9,9 @@ from tqdm import tqdm
 
 
 def getRandomAya(lang = 'en.sahih'):
-    root = ET.parse('./data/'+lang+'.xml').getroot()
+    _ROOT = os.path.abspath(os.path.dirname(__file__))
+    data_dir = os.path.join(_ROOT, 'data')
+    root = ET.parse(data_dir+'/'+lang+'.xml').getroot()
     rand_sura = random.randint(1,114)
     p = "sura[@index='{}']/aya".format(str(rand_sura))
     rand_aya =random.randint(1,len(root.findall(p)))
@@ -18,13 +20,15 @@ def getRandomAya(lang = 'en.sahih'):
 
 
 def getMultiRandomAya(lang = ['en.sahih']):
+    _ROOT = os.path.abspath(os.path.dirname(__file__))
+    data_dir = os.path.join(_ROOT, 'data')
     result ={}
     rand_sura = random.randint(1,114)
     p = "sura[@index='{}']/aya".format(str(rand_sura))
     flag = True
     result['surah'] = str(rand_sura)
     for l in lang:
-        root = ET.parse('./data/'+l+'.xml').getroot()
+        root = ET.parse(data_dir +'/'+ l +'.xml').getroot()
         while(flag):
             rand_aya =random.randint(1,len(root.findall(p)))
             result['aya'] = str(rand_aya)
@@ -38,13 +42,13 @@ def getMultiRandomAya(lang = ['en.sahih']):
 
 def getTranslation(name=""):
     _ROOT = os.path.abspath(os.path.dirname(__file__))
-    filename = os.path.join(_ROOT, 'data', name +".xml")
+    data_dir = os.path.join(_ROOT, 'data', name +".xml")
     if name:
         print ("Downloading translation ("+name+")..... ")
         url = "http://tanzil.net/trans/?transID={}&type=xml".format(name)
         response = requests.get(url, stream=True)
         try:
-            with open(filename, "wb") as handle:
+            with open(data_dir, "wb") as handle:
                 for data in tqdm(response.iter_content()):
                     handle.write(data)
                 if (handle.tell() < 150):
@@ -57,7 +61,9 @@ def getTranslation(name=""):
     else:
         print ("Oops! You forgot to mention translate tag, refer README for details")
 
-
+print getMultiRandomAya()
+print getRandomAya()
+getTranslation("en.sahih")
 
 
 

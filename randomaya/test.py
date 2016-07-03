@@ -1,3 +1,6 @@
 import randomaya
 
-print randomaya.getRandomAya()
+
+print getMultiRandomAya()
+print getRandomAya()
+getTranslation("en.sahih")
